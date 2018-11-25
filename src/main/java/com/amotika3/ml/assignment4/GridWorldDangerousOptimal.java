@@ -60,19 +60,25 @@ public class GridWorldDangerousOptimal {
 	};
 	
 	public static void main(String[] args) {
-		GridWorldDangerousOptimal valueIteration = new GridWorldDangerousOptimal(1);
-		GridWorldDangerousOptimal policyIteration = new GridWorldDangerousOptimal(1);
-		GridWorldDangerousOptimal qLearning = new GridWorldDangerousOptimal(.9);
+		if (args.length < 1) {
+			throw new RuntimeException("Input needs one args: probabilityOfSuccess");
+		}
+			
+		double probabilityOfSuccess = Double.parseDouble(args[0]);
+		
+		GridWorldDangerousOptimal valueIteration = new GridWorldDangerousOptimal(probabilityOfSuccess);
+		GridWorldDangerousOptimal policyIteration = new GridWorldDangerousOptimal(probabilityOfSuccess);
+		GridWorldDangerousOptimal qLearning = new GridWorldDangerousOptimal(probabilityOfSuccess);
 		String outputPath = "output/"; //directory to record results
 		for (int i = 1; i < 20; i+=2) {
-//			valueIteration.runValueIteration(outputPath, i);
-//			policyIteration.runPolicyIteration(outputPath, i);
-//			qLearning.runQLearning();
+			valueIteration.runValueIteration(outputPath, i);
+			policyIteration.runPolicyIteration(outputPath, i);
+
 			
 		}
 		qLearning.runQLearningIteration(outputPath);
-//		valueIteration.printRuns("Value Iteration");
-//		policyIteration.printRuns("Policy Iteration");
+		valueIteration.printRuns("Value Iteration");
+		policyIteration.printRuns("Policy Iteration");
 		qLearning.printRuns("qLearning");
 	}
 	

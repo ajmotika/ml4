@@ -75,8 +75,12 @@ public class GridWorldSuboptimalTeminals {
 	};
 	
 	public static void main(String[] args) {
-		double probabilityOfSuccess = .8;
-		double discountFactor = .95;
+		if (args.length < 2) {
+			throw new RuntimeException("Input needs two args: probabilityOfSuccess and discountFactor");
+		}
+			
+		double probabilityOfSuccess = Double.parseDouble(args[0]);
+		double discountFactor = Double.parseDouble(args[1]);
 		GridWorldSuboptimalTeminals valueIteration = new GridWorldSuboptimalTeminals(probabilityOfSuccess);
 		GridWorldSuboptimalTeminals policyIteration = new GridWorldSuboptimalTeminals(probabilityOfSuccess);
 		GridWorldSuboptimalTeminals qLearning = new GridWorldSuboptimalTeminals(probabilityOfSuccess);
